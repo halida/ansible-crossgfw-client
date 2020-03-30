@@ -1,0 +1,30 @@
+# kcp
+- name: create kcp dir
+  file:
+    path: "{{kcp_path}}"
+    state: directory
+  become: true
+
+# download if not exists
+- name: check if kcp is installed
+  stat: path="{{kcp_path}}/{{kcp_bin}}"
+  register: p_kcp
+  become: true
+
+- name: install kcp
+  unarchive: src={{kcp_download_url}} dest={{kcp_path}} remote_src=True
+  when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
+  become: true
+
+- name: make kcp an service
+  template:
+    src: "kcp.service.j2"
+    dest: "~/.config/systemd/user/kcp.service"
+
+- name: start kcp
+  systemd:
+    name: "sslocal-kcp"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+    scope: user

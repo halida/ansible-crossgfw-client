@@ -1,0 +1,9 @@
+[Unit]
+Description=KCP
+
+[Service]
+Type=simple
+ExecStart={{kcp_path}}/{{kcp_bin}} -r "{{kcp_server}}:{{kcp_port}}" -l ":{{kcp_local_port}}" -key "{{kcp_password}}" -mtu 1400 -sndwnd 106 -rcvwnd 2048 -mode fast2
+
+[Install]
+WantedBy=multi-user.target

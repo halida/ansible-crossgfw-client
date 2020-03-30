@@ -1,0 +1,10 @@
+[Unit]
+Description=SS
+Documentation=man:ssserver
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ss-local -s 127.0.0.1 -p {{kcp_local_port}} -k "{{ss_password}}" -b {{ss_local_ip}} -l {{ss_local_port}} -m chacha20-ietf-poly1305
+
+[Install]
+WantedBy=multi-user.target

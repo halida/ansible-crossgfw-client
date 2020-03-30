@@ -1,0 +1,23 @@
+# ss
+# - name: ss repo
+#   apt_repository:
+#     repo: "ppa:max-c-lv/shadowsocks-libev"
+#   become: true
+
+- name: install ss
+  apt:
+    name: shadowsocks-libev
+  become: true
+
+- name: make ss an service
+  template:
+    src: "ss.service.j2"
+    dest: "~/.config/systemd/user/sslocal-kcp.service"
+
+- name: start ss
+  systemd:
+    name: "sslocal-kcp"
+    daemon_reload: yes
+    state: started
+    enabled: yes
+    scope: user
