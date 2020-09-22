@@ -18,3 +18,8 @@ Start service:
 systemctl --user start kcp
 systemctl --user start sslocal-kcp
 ```
+
+Testing:
+```sh
+curl -i -x socks5h://127.0.0.1:1082 http://www.twitter.com/
+```
