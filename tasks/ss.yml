@@ -9,6 +9,11 @@
     name: shadowsocks-libev
   become: true
 
+- name: mkdir
+  file:
+    path: "~/.config/systemd/user/"
+    state: directory
+
 - name: make ss an service
   template:
     src: "ss.service.j2"
