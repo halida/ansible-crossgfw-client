@@ -8,8 +8,8 @@ kcp_local_port: 7022
 # kcp_password: password
 
 # https://github.com/xtaci/kcptun/releases
-kcp_download_url: "https://github.com/xtaci/kcptun/releases/download/v20200701/kcptun-linux-amd64-20200701.tar.gz"
-
+kcp_arch: 'amd64'
+kcp_version: "20200701"
 kcp_bin: "client_linux_amd64"
 kcp_path: "/etc/kcp"
 

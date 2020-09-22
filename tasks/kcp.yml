@@ -1,18 +1,21 @@
 # kcp
 - name: create kcp dir
   file:
-    path: "{{kcp_path}}"
+    path: "{{kcp_path}}/{{kcp_version}}"
     state: directory
   become: true
 
 # download if not exists
 - name: check if kcp is installed
-  stat: path="{{kcp_path}}/{{kcp_bin}}"
+  stat: path="{{kcp_path}}/{{kcp_version}}/{{kcp_bin}}"
   register: p_kcp
   become: true
 
 - name: install kcp
-  unarchive: src={{kcp_download_url}} dest={{kcp_path}} remote_src=True
+  unarchive:
+    src: "https://github.com/xtaci/kcptun/releases/download/v{{kcp_version}}/kcptun-linux-{{kcp_arch}}-{{kcp_version}}.tar.gz"
+    dest: "{{kcp_path}}/{{kcp_version}}"
+    remote_src: True
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
   become: true
 
