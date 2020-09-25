@@ -9,20 +9,14 @@
     name: shadowsocks-libev
   become: true
 
-- name: mkdir
-  file:
-    path: "~/.config/systemd/user/"
-    state: directory
+- name: dont need ss server
+  service:
+    name: shadowsocks-libev
+    enabled: false
+    state: stopped
 
-- name: make ss an service
-  template:
-    src: "ss.service.j2"
-    dest: "~/.config/systemd/user/sslocal-kcp.service"
-
-- name: start ss
-  systemd:
-    name: "sslocal-kcp"
-    daemon_reload: yes
-    state: started
-    enabled: yes
-    scope: user
+- import_role:
+    name: cmd-service
+  vars:
+    name: sslocal-kcp
+    cmd: "/usr/bin/ss-local -s 127.0.0.1 -p {{kcp_local_port}} -k '{{ss_password}}' -b {{ss_local_ip}} -l {{ss_local_port}} -m chacha20-ietf-poly1305"

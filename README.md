@@ -2,7 +2,14 @@
 
 ## Usage
 
-Clone to your roles folder as `crossgfw-client`, then in your playbooks file:
+Clone to your roles folder as `crossgfw-client`, also need cmd-service role:
+
+```sh
+git submodule add git@github.com:halida/ansible-crossgfw-client.git roles/crossgfw-client
+git submodule add git@github.com:halida/ansible-cmd-service.git roles/cmd-service
+```
+
+Then in your playbooks file:
 
 ```yaml
   roles:

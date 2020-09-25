@@ -19,15 +19,8 @@
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
   become: true
 
-- name: make kcp an service
-  template:
-    src: "kcp.service.j2"
-    dest: "~/.config/systemd/user/kcp.service"
-
-- name: start kcp
-  systemd:
-    name: "sslocal-kcp"
-    daemon_reload: yes
-    state: started
-    enabled: yes
-    scope: user
+- import_role:
+    name: cmd-service
+  vars:
+    name: kcp
+    cmd: "{{kcp_path}}/{{kcp_version}}/{{kcp_bin}} -r '{{kcp_server}}:{{kcp_port}}' -l ':{{kcp_local_port}}' -key '{{kcp_password}}' -mtu 1400 -sndwnd 106 -rcvwnd 2048 -mode fast2"
