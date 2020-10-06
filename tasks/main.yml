@@ -1,6 +1,6 @@
-- include: ss.yml
-  become: false
 - include: kcp.yml
+  become: false
+- include: ss.yml
   become: false
 - import_tasks: http-proxy-to-socks.yml
   when: "hpts"
