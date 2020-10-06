@@ -1,4 +1,21 @@
 # kcp
+- name: debug
+  debug:
+    msg: System arch {{ ansible_architecture }}
+
+- name: set arch amd64
+  set_fact:
+    kcp_arch: "amd64"
+  when: "'{{ ansible_architecture }}' == 'x86_64'"
+- name: set arch arm7
+  set_fact:
+    kcp_arch: "arm7"
+  when: "'{{ ansible_architecture }}' == 'aarch64'"
+
+- name: set fact
+  set_fact:
+    kcp_bin: "client_linux_{{ kcp_arch }}"
+
 - name: create kcp dir
   file:
     path: "{{kcp_path}}/{{kcp_version}}"
@@ -13,7 +30,7 @@
 
 - name: install kcp
   unarchive:
-    src: "https://github.com/xtaci/kcptun/releases/download/v{{kcp_version}}/kcptun-linux-{{kcp_arch}}-{{kcp_version}}.tar.gz"
+    src: "https://github.com/xtaci/kcptun/releases/download/v{{ kcp_version }}/kcptun-linux-{{ kcp_arch }}-{{ kcp_version }}.tar.gz"
     dest: "{{kcp_path}}/{{kcp_version}}"
     remote_src: True
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
