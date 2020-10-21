@@ -11,6 +11,10 @@
   set_fact:
     kcp_arch: "arm7"
   when: "'{{ ansible_architecture }}' == 'aarch64'"
+- name: set arch arm7
+  set_fact:
+    kcp_arch: "arm7"
+  when: "'{{ ansible_architecture }}' == 'armv7l'"
 
 - name: set fact
   set_fact:
