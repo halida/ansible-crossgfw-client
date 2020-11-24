@@ -17,7 +17,7 @@
   become: true
 
 - import_role:
-    name: cmd-service
+    name: halida.cmd_service
   vars:
     name: sslocal-kcp
     cmd: "/usr/bin/ss-local -s 127.0.0.1 -p {{kcp_local_port}} -k '{{ss_password}}' -b {{ss_local_ip}} -l {{ss_local_port}} -m chacha20-ietf-poly1305"

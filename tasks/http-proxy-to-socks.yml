@@ -5,7 +5,7 @@
   become: true
 
 - import_role:
-    name: cmd-service
+    name: halida.cmd_service
   vars:
     name: hpts
     cmd: "hpts -s 127.0.0.1:{{ss_local_port}} -l {{hpts_ip}} -p {{hpts_port}}"
