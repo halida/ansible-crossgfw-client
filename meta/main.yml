@@ -1,6 +1,7 @@
 galaxy_info:
+  role_name: crossgfw_client
   author: linjunhalida
-  description: crossgfw-client
+  description: crossgfw_client
   company: none
 
   # If the issue tracker for your role is not on github, uncomment the
