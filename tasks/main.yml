@@ -2,5 +2,5 @@
   become: false
 - include: ss.yml
   become: false
-- import_tasks: http-proxy-to-socks.yml
+- include_tasks: http-proxy-to-socks.yml
   when: "hpts"

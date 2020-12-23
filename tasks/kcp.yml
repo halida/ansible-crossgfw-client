@@ -19,6 +19,13 @@
 - name: set fact
   set_fact:
     kcp_bin: "client_linux_{{ kcp_arch }}"
+    kcp_zip: "kcptun-linux-{{ kcp_arch }}-{{ kcp_version }}.tar.gz"
+
+- name: set fact
+  set_fact:
+    kcp_url: "https://github.com/xtaci/kcptun/releases/download/v{{ kcp_version }}/{{ kcp_zip }}"
+- debug:
+    msg: "should download kcp manually and put it under /tmp/: {{kcp_url}}"
 
 - name: create kcp dir
   file:
@@ -32,11 +39,19 @@
   register: p_kcp
   become: true
 
+# - name: download kcp
+#   get_url:
+#     url: "https://github.com/xtaci/kcptun/releases/download/v{{ kcp_version }}/{{ kcp_zip }}"
+#     dest: "/tmp/{{ kcp_zip }}"
+#   environment:
+#     http_proxy: "{{http_proxy}}"
+#   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
+
 - name: install kcp
   unarchive:
-    src: "https://github.com/xtaci/kcptun/releases/download/v{{ kcp_version }}/kcptun-linux-{{ kcp_arch }}-{{ kcp_version }}.tar.gz"
+    src: "/tmp/{{kcp_zip}}"
     dest: "{{kcp_path}}/{{kcp_version}}"
-    remote_src: True
+    # remote_src: True
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
   become: true
 
