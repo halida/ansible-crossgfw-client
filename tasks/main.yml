@@ -3,4 +3,4 @@
 - include: ss.yml
   become: false
 - include_tasks: http-proxy-to-socks.yml
-  when: "hpts"
+  when: "hpts == true"

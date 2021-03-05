@@ -51,7 +51,7 @@
   unarchive:
     src: "/tmp/{{kcp_zip}}"
     dest: "{{kcp_path}}/{{kcp_version}}"
-    # remote_src: True
+    remote_src: true
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
   become: true
 
