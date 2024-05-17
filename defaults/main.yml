@@ -7,12 +7,11 @@ ss_port: 4433
 ss_local_port: 1082
 ss_local_ip: 0.0.0.0
 
-kcp_port: 42901
+kcp_port: 42901-44901
 kcp_server: 127.0.0.1
 kcp_local_port: 7022
 # kcp_password: password
 
 # https://github.com/xtaci/kcptun/releases
-kcp_version: "20200701"
+kcp_version: "20240107"
 kcp_path: "/etc/kcp"
-

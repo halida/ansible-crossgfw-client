@@ -6,15 +6,15 @@
 - name: set arch amd64
   set_fact:
     kcp_arch: "amd64"
-  when: "'{{ ansible_architecture }}' == 'x86_64'"
+  when: "ansible_architecture == 'x86_64'"
 - name: set arch arm7
   set_fact:
     kcp_arch: "arm7"
-  when: "'{{ ansible_architecture }}' == 'aarch64'"
+  when: "ansible_architecture == 'aarch64'"
 - name: set arch arm7
   set_fact:
     kcp_arch: "arm7"
-  when: "'{{ ansible_architecture }}' == 'armv7l'"
+  when: "ansible_architecture == 'armv7l'"
 
 - name: set fact
   set_fact:
@@ -39,19 +39,10 @@
   register: p_kcp
   become: true
 
-# - name: download kcp
-#   get_url:
-#     url: "https://github.com/xtaci/kcptun/releases/download/v{{ kcp_version }}/{{ kcp_zip }}"
-#     dest: "/tmp/{{ kcp_zip }}"
-#   environment:
-#     http_proxy: "{{http_proxy}}"
-#   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
-
 - name: install kcp
   unarchive:
     src: "/tmp/{{kcp_zip}}"
     dest: "{{kcp_path}}/{{kcp_version}}"
-    remote_src: true
   when: p_kcp.stat.exists is defined and not p_kcp.stat.exists
   become: true
 
