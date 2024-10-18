@@ -1,11 +1,11 @@
 hpts_port: 8080
-hpts_ip: 0.0.0.0
+hpts_ip: 127.0.0.1
 hpts: false
 
 ss_port: 4433
 # ss_password: password
 ss_local_port: 1082
-ss_local_ip: 0.0.0.0
+ss_local_ip: 127.0.0.1
 
 kcp_port: 42901-44901
 kcp_server: 127.0.0.1
